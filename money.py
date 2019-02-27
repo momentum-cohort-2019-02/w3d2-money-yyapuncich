@@ -66,7 +66,7 @@ class Money:
         pass
 
     def __repr__(self):
-        return f"<Money {str(self)}>"
+        return f"Money {str(self)}"
 
     def __eq__(self, other):
         """
@@ -80,6 +80,12 @@ class Money:
         Add two money objects of the same currency. If they have different
         currencies, raise a DifferentCurrencyError.
         """
+        if self.currency != other.currency:
+            raise DifferentCurrencyError
+        if self.currency == other.currency:
+# The below took me an eternity guys. I realized the class Money was called on the test items and that's how I get them in the same format!!!!!!! AHAH!!
+            total = Money((self.amount + other.amount), self.currency)
+            return total
         pass
 
     def sub(self, other):
@@ -87,6 +93,8 @@ class Money:
         Subtract two money objects of the same currency. If they have different
         currencies, raise a DifferentCurrencyError.
         """
+        if self.currency != other.currency:
+            raise DifferentCurrencyError
         pass
 
     def mul(self, multiplier):
