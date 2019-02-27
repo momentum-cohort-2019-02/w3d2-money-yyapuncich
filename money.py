@@ -19,14 +19,12 @@ class Currency:
         self.code = code
         self.symbol = symbol
         self.digits = digits
-        pass
 
     def __str__(self):
         """
         Should return the currency code, or code with symbol in parentheses.
         """
         self = str(self.code) or str(self.code(self.symbol))
-        pass
 
     def __eq__(self, other):
         """
@@ -50,7 +48,6 @@ class Money:
         """
         self.amount = amount
         self.currency = currency
-        pass
 
     def __str__(self):
         """
@@ -63,7 +60,6 @@ class Money:
             return str(f'{self.currency.code} {self.amount:.{self.currency.digits}f}')
         else:
             return str(f'{self.amount:.{self.currency.digits}f}')
-        pass
 
     def __repr__(self):
         return f"Money {str(self)}"
@@ -84,9 +80,7 @@ class Money:
             raise DifferentCurrencyError
         if self.currency == other.currency:
 # The below took me an eternity guys. I realized the class Money was called on the test items and that's how I get them in the same format!!!!!!! AHAH!!
-            total = Money((self.amount + other.amount), self.currency)
-            return total
-        pass
+            return Money((self.amount + other.amount), self.currency)
 
     def sub(self, other):
         """
@@ -95,16 +89,17 @@ class Money:
         """
         if self.currency != other.currency:
             raise DifferentCurrencyError
-        pass
+        if self.currency == other.currency:
+            return Money((self.amount - other.amount), self.currency)
 
     def mul(self, multiplier):
         """
         Multiply a money object by a number to get a new money object.
         """
-        pass
+        return Money((self.amount * multiplier), self.currency)
 
     def div(self, divisor):
         """
         Divide a money object by a number to get a new money object.
         """
-        pass
+        return Money((self.amount / divisor), self.currency)
